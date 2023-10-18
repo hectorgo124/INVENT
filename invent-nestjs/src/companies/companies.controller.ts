@@ -3,6 +3,7 @@ import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { GetCompanyDto } from './dto/get-company.dto';
 
 @ApiTags('Companies')
 @Controller('companies')
@@ -20,7 +21,7 @@ export class CompaniesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string) : GetCompanyDto  {
     return this.companiesService.findOne(+id);
   }
 
