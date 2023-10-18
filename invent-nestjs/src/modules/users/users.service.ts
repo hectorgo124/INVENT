@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { GetUserDto } from './dto/get-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { where } from 'sequelize';
 
 @Injectable()
 export class UsersService {
@@ -22,12 +23,12 @@ export class UsersService {
     return this.usersRepository.findAll<User>();
   }
 
-  findOne(id: number): GetUserDto {
-    return {
-      email: 'prueba@gmail.com',
-      name: 'PRUEBA',
-      username: 'Prueba123',
-    };
+  findOne(username: string): Promise<GetUserDto> {
+    return this.usersRepository.findOne<User>({
+      where: {
+        username: username,
+      },
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

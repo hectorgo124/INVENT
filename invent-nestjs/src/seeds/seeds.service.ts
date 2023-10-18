@@ -5,7 +5,7 @@ import { Shipment } from 'src/modules/shipments/entities/shipment.entity';
 import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
 import { User } from 'src/modules/users/entities/user.entity';
 import { UsersService } from 'src/modules/users/users.service';
-import { users } from './consts';
+import { users } from './constants';
 import { Sequelize } from 'sequelize-typescript';
 @Injectable()
 export class SeedsService {
@@ -19,6 +19,7 @@ export class SeedsService {
 
     await this.sequelize.sync().then(() => {
       this.seedUsers();
+        // TODO: SEED DE LAS DEMAS TABLAS
     });
   }
 

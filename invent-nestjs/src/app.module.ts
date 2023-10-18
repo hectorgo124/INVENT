@@ -6,9 +6,10 @@ import { PackageTypesModule } from './modules/package-types/package-types.module
 import { DatabaseModule } from './database/database.module';
 import { ZipModule } from './modules/zip/zip.module';
 import { SeedsModule } from './seeds/seeds.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, ShipmentsModule, CompaniesModule, PackageTypesModule, DatabaseModule, ZipModule, SeedsModule],
+  imports: [UsersModule, ShipmentsModule, CompaniesModule, PackageTypesModule, DatabaseModule, ZipModule, SeedsModule, AuthModule],
   controllers: [],
   providers: [],
 })

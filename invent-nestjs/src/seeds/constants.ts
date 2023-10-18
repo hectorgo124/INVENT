@@ -4,7 +4,7 @@ export const users: CreateUserDto[] = [
   {
     email: 'hector@invent.com',
     name: 'Hector Granell',
-    password: 'password',
+    password: 'password123',
     username: 'hectorgo',
   },
   {

@@ -2,9 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PackageTypesService } from './package-types.service';
 import { CreatePackageTypeDto } from './dto/create-package-type.dto';
 import { UpdatePackageTypeDto } from './dto/update-package-type.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GetPackageTypeDto } from './dto/get-package-type.dto';
 
+@ApiBearerAuth()
 @ApiTags('Packages Types')
 @Controller('package-types')
 export class PackageTypesController {
