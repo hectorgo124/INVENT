@@ -1,20 +1,27 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Column, Model, Table } from "sequelize-typescript";
+import { ApiProperty } from '@nestjs/swagger';
+import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { PackageType } from 'src/package-types/entities/package-type.entity';
 
 @Table
 export class Shipment extends Model {
-    @Column
-    address: string;
+  @Column
+  address: string;
 
-    @Column
-    zip: number;
+  @Column
+  zip: number;
 
-    @Column
-    senderName: string;
+  @Column
+  senderName: string;
 
-    @Column
-    recipientName: string;
+  @Column
+  recipientName: string;
 
-    @Column
-    weight: number;
+  @Column
+  weight: number;
+
+  @ForeignKey(() => PackageType)
+  companyId: number;
+
+  @BelongsTo(() => PackageType)
+  company: PackageType;
 }
