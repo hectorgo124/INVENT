@@ -1,0 +1,9 @@
+ var formula = "x * 5 + x + 75";
+
+  // Sustituye "x" por el valor que desees
+  var x = 2; // Por ejemplo, asignamos 10 a x
+  
+  // Evalúa la fórmula
+  var resultado = eval(formula);
+  
+  console.log("El resultado es: " + resultado);
