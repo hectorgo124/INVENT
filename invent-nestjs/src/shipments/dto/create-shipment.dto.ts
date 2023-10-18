@@ -1,5 +1,4 @@
 import { ApiProperty, OmitType, PartialType } from "@nestjs/swagger";
-import { Shipment } from "../entities/shipment.entity";
 import { IsNotEmpty } from "class-validator";
 
 export class CreateShipmentDto {

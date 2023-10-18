@@ -1,10 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { DataTypes } from 'sequelize';
+import { Model, Table, Column, DataType, BelongsToMany, HasMany } from 'sequelize-typescript';
+import { Zip } from 'src/zip/entities/zip.entity';
 
-export class Company {
-
-    id: number;
-
-    name: string;
-    
-    zips: number[];
+@Table
+export class Company extends Model {
+  @Column
+  name: string;
+  
+  @HasMany(() => Zip)
+  zips: Zip[];
 }

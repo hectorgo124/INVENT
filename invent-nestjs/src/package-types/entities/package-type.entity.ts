@@ -1,17 +1,16 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { Column, Model, Table } from "sequelize-typescript";
 
-export class PackageType {
-    id: number;
-    
-    @ApiProperty()
+@Table
+export class PackageType extends Model{
+    @Column
     description: string;   
 
-    @ApiProperty()
+    @Column
     min: number;
 
-    @ApiProperty()
+    @Column
     max: number;
 
-    @ApiProperty()
+    @Column
     formula: string;
 }
