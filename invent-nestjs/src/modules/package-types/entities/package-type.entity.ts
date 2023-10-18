@@ -1,5 +1,5 @@
 import { Column, HasMany, Model, Table } from 'sequelize-typescript';
-import { Shipment } from 'src/shipments/entities/shipment.entity';
+import { Shipment } from 'src/modules/shipments/entities/shipment.entity';
 
 @Table
 export class PackageType extends Model {

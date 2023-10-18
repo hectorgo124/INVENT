@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { PackageType } from 'src/package-types/entities/package-type.entity';
+import { PackageType } from 'src/modules/package-types/entities/package-type.entity';
 
 @Table
 export class Shipment extends Model {

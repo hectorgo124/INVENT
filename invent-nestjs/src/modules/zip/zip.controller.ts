@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ZipService } from './zip.service';
 import { CreateZipDto } from './dto/create-zip.dto';
 import { UpdateZipDto } from './dto/update-zip.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('ZIP')
 @Controller('zip')
 export class ZipController {
   constructor(private readonly zipService: ZipService) {}

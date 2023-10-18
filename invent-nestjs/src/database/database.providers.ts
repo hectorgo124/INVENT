@@ -1,9 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Company } from 'src/companies/entities/company.entity';
-import { PackageType } from 'src/package-types/entities/package-type.entity';
-import { Shipment } from 'src/shipments/entities/shipment.entity';
-import { User } from 'src/users/entities/user.entity';
-import { Zip } from 'src/zip/entities/zip.entity';
+import { Company } from 'src/modules/companies/entities/company.entity';
+import { PackageType } from 'src/modules/package-types/entities/package-type.entity';
+import { Shipment } from 'src/modules/shipments/entities/shipment.entity';
+import { User } from 'src/modules/users/entities/user.entity';
+import { Zip } from 'src/modules/zip/entities/zip.entity';
 
 export const databaseProviders = [
   {

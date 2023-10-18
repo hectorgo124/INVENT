@@ -1,5 +1,5 @@
 import { ApiProperty} from "@nestjs/swagger";
-import { Zip } from "src/zip/entities/zip.entity";
+import { Zip } from "src/modules/zip/entities/zip.entity";
 
 export class CreateCompanyDto {
     @ApiProperty()

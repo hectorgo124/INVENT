@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ShipmentsModule } from './shipments/shipments.module';
-import { UsersModule } from './users/users.module';
-import { CompaniesModule } from './companies/companies.module';
-import { PackageTypesModule } from './package-types/package-types.module';
+import { UsersModule } from './modules/users/users.module';
+import { ShipmentsModule } from './modules/shipments/shipments.module';
+import { CompaniesModule } from './modules/companies/companies.module';
+import { PackageTypesModule } from './modules/package-types/package-types.module';
 import { DatabaseModule } from './database/database.module';
-import { ZipModule } from './zip/zip.module';
+import { ZipModule } from './modules/zip/zip.module';
+import { SeedsModule } from './seeds/seeds.module';
 
 @Module({
-  imports: [UsersModule, ShipmentsModule, CompaniesModule, PackageTypesModule, DatabaseModule, ZipModule],
+  imports: [UsersModule, ShipmentsModule, CompaniesModule, PackageTypesModule, DatabaseModule, ZipModule, SeedsModule],
   controllers: [],
   providers: [],
 })

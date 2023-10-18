@@ -1,5 +1,5 @@
 import { Table, Column, Model, BelongsTo, ForeignKey } from 'sequelize-typescript';
-import { Company } from 'src/companies/entities/company.entity';
+import { Company } from 'src/modules/companies/entities/company.entity';
 
 @Table
 export class Zip extends Model {
