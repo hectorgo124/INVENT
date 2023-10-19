@@ -19,7 +19,7 @@ export class UsersService {
     return await this.usersRepository.create<User>({ ...createUserDto });
   }
 
-  async findAll():  Promise<GetUserDto[]> {
+  async findAll(): Promise<GetUserDto[]> {
     return this.usersRepository.findAll<User>();
   }
 
@@ -37,6 +37,8 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`User not found`);
     }
+
+    updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
 
     await user.update(updateUserDto);
 
