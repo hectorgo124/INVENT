@@ -22,28 +22,8 @@ import { AuthGuard } from 'src/auth/auth.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  createUser(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
-
   @Get()
-  findAll() {
+  findAll(): Promise<GetUserDto[]> {
     return this.usersService.findAll();
-  }
-
-  @Patch(':id')
-  updateUser(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
-
-  @Delete(':id')
-  removeUser(@Param('id') id: number) {
-    return this.usersService.remove(+id);
-  }
-
-  @Get('me')
-  getProfile(@Request() req) {
-    return req.user;
   }
 }

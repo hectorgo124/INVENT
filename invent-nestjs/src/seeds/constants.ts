@@ -1,3 +1,6 @@
+import { CreateCompanyDto } from 'src/modules/companies/dto/create-company.dto';
+import { CreatePackageTypeDto } from 'src/modules/package-types/dto/create-package-type.dto';
+import { CreateShipmentDto } from 'src/modules/shipments/dto/create-shipment.dto';
 import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
 
 export const users: CreateUserDto[] = [
@@ -42,5 +45,81 @@ export const users: CreateUserDto[] = [
     name: 'Ana Sánchez',
     password: 'password',
     username: 'anasanchez',
+  },
+];
+
+export const companies : any = [
+  {
+    name: 'Correos',
+    zips: [15, 16, 17, 18, 19],
+  },
+  {
+    name: 'Seur',
+    zips: [20, 21, 22, 23, 24, 25],
+  },
+  {
+    name: 'INVENT',
+    zips: [],
+  },
+];
+
+export const shipments: CreateShipmentDto[] = [
+  {
+    address: 'Secundino Esnaola Kalea, 36, Bajo',
+    zip: 20001,
+    senderName: 'Juan Pérez',
+    recipientName: 'María López',
+    weight: 0.7,
+    price: 7,
+  },
+  {
+    address:
+      'Parque Tecnológico de, Rda. de Narcís Monturiol, 7, piso 2, puerta 15',
+    zip: 46980,
+    senderName: 'Hector Granell',
+    recipientName: 'Dámaso González',
+    weight: 1.2,
+    price: 12,
+  },
+  {
+    address: 'Ronda del Calvari',
+    zip: 46680,
+    senderName: 'Ana Sánchez',
+    recipientName: 'Pedro Ruiz',
+    weight: 5.5,
+    price: 108,
+  },
+];
+
+export const packageType: CreatePackageTypeDto[] = [
+  {
+    description: 'Paquete ultra ligero',
+    formula: 'x * 5',
+    min: 0,
+    max: 0.1,
+  },
+  {
+    description: 'Paquete ligero',
+    formula: 'x * 5 + 1',
+    min: 0.1,
+    max: 0.3,
+  },
+  {
+    description: 'Paquete estándar',
+    formula: 'x * 10',
+    min: 0.3,
+    max: 5,
+  },
+  {
+    description: 'Paquete pesado',
+    formula: 'x * 5 + x + 75',
+    min: 5,
+    max: 10,
+  },
+  {
+    description: 'Gran volumen',
+    formula: '(x - 10) * 7.5 + 130 + x',
+    min: 10,
+    max: null,
   },
 ];

@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType, PartialType } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 
 export class CreateShipmentDto {
@@ -20,4 +20,7 @@ export class CreateShipmentDto {
 
     @ApiProperty()
     weight: number;
+
+    @ApiProperty()
+    price: number;
 }

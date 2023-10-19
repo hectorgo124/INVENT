@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ShipmentsService } from './shipments.service';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
 import { UpdateShipmentDto } from './dto/update-shipment.dto';
@@ -17,18 +25,8 @@ export class ShipmentsController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<GetShipmentDto[]> {
     return this.shipmentsService.findAll();
-  }
-
-  @Get(':id')
-  findOneShipment(@Param('id') id: number) : GetShipmentDto {
-    return this.shipmentsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateShipmentDto: UpdateShipmentDto) {
-    return this.shipmentsService.update(+id, updateShipmentDto);
   }
 
   @Delete(':id')

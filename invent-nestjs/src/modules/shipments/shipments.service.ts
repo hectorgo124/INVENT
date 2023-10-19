@@ -1,8 +1,9 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
 import { UpdateShipmentDto } from './dto/update-shipment.dto';
 import { GetShipmentDto } from './dto/get-shipment.dto';
 import { Shipment } from './entities/shipment.entity';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class ShipmentsService {
@@ -12,29 +13,42 @@ export class ShipmentsService {
   ) {}
 
   create(createShipmentDto: CreateShipmentDto) {
-    return 'This action adds a new shipment';
+    return this.shipmentsRepository.create<Shipment>({ ...createShipmentDto });
   }
 
-  async findAll() {
-    return this.shipmentsRepository.findAll<Shipment>();
+  async findAll(): Promise<GetShipmentDto[]> {
+    const shipments = await this.shipmentsRepository.findAll<Shipment>();
+
+    if (!shipments) {
+      throw new NotFoundException(`No shipments yet`);
+    }
+
+    return shipments;
   }
 
-  findOne(id: number): GetShipmentDto {
-    return {
-      address: 'Ejemplo address',
-      id: 123,
-      recipientName: 'Nombre',
-      senderName: 'Nombre',
-      weight: 122,
-      zip: 46680,
-    };
+  async findOne(id: number): Promise<GetShipmentDto> {
+    const shipment = await this.shipmentsRepository.findOne<Shipment>({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!shipment) {
+      throw new NotFoundException(`Shipment not found`);
+    }
+
+    return shipment;
   }
 
-  update(id: number, updateShipmentDto: UpdateShipmentDto) {
-    return `This action updates a #${id} shipment`;
-  }
+  async remove(id: number) {
+    const shipment = await this.shipmentsRepository.findByPk(id);
 
-  remove(id: number) {
-    return `This action removes a #${id} shipment`;
+    if (!shipment) {
+      throw new NotFoundException(`Shimpent not found`);
+    }
+
+    await shipment.destroy()
+
+    return `Shipment has been removed`;
   }
 }

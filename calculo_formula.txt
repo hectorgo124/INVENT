@@ -1,4 +1,4 @@
- var formula = "x * 5 + x + 75";
+ var formula = "(x - 10) * 7.5 + 130 + x";
 
   // Sustituye "x" por el valor que desees
   var x = 2; // Por ejemplo, asignamos 10 a x

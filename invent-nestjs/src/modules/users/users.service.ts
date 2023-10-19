@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { GetUserDto } from './dto/get-user.dto';
@@ -19,7 +19,7 @@ export class UsersService {
     return await this.usersRepository.create<User>({ ...createUserDto });
   }
 
-  async findAll() {
+  async findAll():  Promise<GetUserDto[]> {
     return this.usersRepository.findAll<User>();
   }
 
@@ -31,11 +31,27 @@ export class UsersService {
     });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.usersRepository.findByPk(id);
+
+    if (!user) {
+      throw new NotFoundException(`User not found`);
+    }
+
+    await user.update(updateUserDto);
+
+    return `User has been updated`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const user = await this.usersRepository.findByPk(id);
+
+    if (!user) {
+      throw new NotFoundException(`User not found`);
+    }
+
+    await user.destroy();
+
+    return `User has been removed`;
   }
 }

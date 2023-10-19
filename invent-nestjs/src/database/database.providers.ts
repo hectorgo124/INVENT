@@ -8,7 +8,7 @@ import { Zip } from 'src/modules/zip/entities/zip.entity';
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
-    useFactory: async () => {
+    useFactory: async () => { 
       const sequelize = new Sequelize({
         dialect: 'mysql',
         host: 'localhost',

@@ -22,7 +22,7 @@ export class CompaniesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) : GetCompanyDto  {
+  findOne(@Param('id') id: string) : Promise<GetCompanyDto>  {
     return this.companiesService.findOne(+id);
   }
 

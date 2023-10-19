@@ -5,6 +5,7 @@ import { packageTypeProvider } from './package-types.providers';
 
 @Module({
   controllers: [PackageTypesController],
+  exports: [PackageTypesService],
   providers: [PackageTypesService, ...packageTypeProvider],
 })
 export class PackageTypesModule {}

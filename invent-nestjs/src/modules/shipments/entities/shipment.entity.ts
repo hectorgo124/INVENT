@@ -18,6 +18,9 @@ export class Shipment extends Model {
 
   @Column
   weight: number;
+  
+  @Column
+  price: number;
 
   @ForeignKey(() => PackageType)
   companyId: number;

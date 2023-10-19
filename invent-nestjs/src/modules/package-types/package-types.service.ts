@@ -10,29 +10,12 @@ export class PackageTypesService {
     @Inject('PACKAGE_TYPES_REPOSITORY')
     private packageTypesRepository: typeof PackageType,
   ) {}
-  create(createPackageTypeDto: CreatePackageTypeDto) {
-    return 'This action adds a new packageType';
+
+  async create(createPackageTypeDto: CreatePackageTypeDto): Promise<PackageType> {
+    return await this.packageTypesRepository.create<PackageType>({...createPackageTypeDto});
   }
 
   async findAll() {
     return this.packageTypesRepository.findAll<PackageType>();
-  }
-
-  findOne(id: number): GetPackageTypeDto {
-    return {
-      description: 'Descripción',
-      formula: 'x+5-7',
-      id: 1,
-      max: 1,
-      min: 0.6,
-    };
-  }
-
-  update(id: number, updatePackageTypeDto: UpdatePackageTypeDto) {
-    return `This action updates a #${id} packageType`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} packageType`;
   }
 }
