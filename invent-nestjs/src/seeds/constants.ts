@@ -48,7 +48,7 @@ export const users: CreateUserDto[] = [
   },
 ];
 
-export const companies : any = [
+export const companies: any = [
   {
     name: 'Correos',
     zips: [15, 16, 17, 18, 19],
@@ -60,34 +60,6 @@ export const companies : any = [
   {
     name: 'INVENT',
     zips: [],
-  },
-];
-
-export const shipments: CreateShipmentDto[] = [
-  {
-    address: 'Secundino Esnaola Kalea, 36, Bajo',
-    zip: 20001,
-    senderName: 'Juan Pérez',
-    recipientName: 'María López',
-    weight: 0.7,
-    price: 7,
-  },
-  {
-    address:
-      'Parque Tecnológico de, Rda. de Narcís Monturiol, 7, piso 2, puerta 15',
-    zip: 46980,
-    senderName: 'Hector Granell',
-    recipientName: 'Dámaso González',
-    weight: 1.2,
-    price: 12,
-  },
-  {
-    address: 'Ronda del Calvari',
-    zip: 46680,
-    senderName: 'Ana Sánchez',
-    recipientName: 'Pedro Ruiz',
-    weight: 5.5,
-    price: 108,
   },
 ];
 
@@ -121,5 +93,39 @@ export const packageType: CreatePackageTypeDto[] = [
     formula: '(x - 10) * 7.5 + 130 + x',
     min: 10,
     max: null,
+  },
+];
+
+export const shipments: CreateShipmentDto[] = [
+  {
+    address: 'Secundino Esnaola Kalea, 36, Bajo',
+    zip: 20001,
+    senderName: 'Juan Pérez',
+    recipientName: 'María López',
+    weight: 0.7,
+    price: 7,
+    typeId: 3,
+    companyId: 2,
+  },
+  {
+    address:
+      'Parque Tecnológico de, Rda. de Narcís Monturiol, 7, piso 2, puerta 15',
+    zip: 46980,
+    senderName: 'Hector Granell',
+    recipientName: 'Dámaso González',
+    weight: 1.2,
+    price: 12,
+    typeId: 3,
+    companyId: 3,
+  },
+  {
+    address: 'Ronda del Calvari',
+    zip: 46680,
+    senderName: 'Ana Sánchez',
+    recipientName: 'Pedro Ruiz',
+    weight: 5.5,
+    price: 108,
+    typeId: 4,
+    companyId: 3,
   },
 ];

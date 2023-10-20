@@ -7,10 +7,10 @@ export class PackageType extends Model {
   description: string;
 
   @Column
-  min: number;
+  min: string;
 
   @Column
-  max: number;
+  max: string;
 
   @Column
   formula: string;

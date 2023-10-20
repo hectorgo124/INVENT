@@ -23,4 +23,10 @@ export class CreateShipmentDto {
 
     @ApiProperty()
     price: number;
+
+    @ApiProperty()
+    companyId: number;
+    
+    @ApiProperty()
+    typeId: number;
 }

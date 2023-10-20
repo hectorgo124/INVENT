@@ -7,23 +7,22 @@ import { Zip } from './entities/zip.entity';
 export class ZipService {
   constructor(@Inject('ZIP_REPOSITORY') private zipRepository: typeof Zip) {}
 
-  create(createZipDto: CreateZipDto) {
-    return 'This action adds a new zip';
+  async findAll() {
+    return await this.zipRepository.findAll<Zip>();
   }
 
-  findAll() {
-    return this.zipRepository.findAll<Zip>();
-  }
+  async getAvailable() {
+    const usedZips = await this.zipRepository.findAll({
+      attributes: ['number'],
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} zip`;
-  }
+    const usedNumbers = usedZips.map((zip) => zip.number);
+    const allNumbers = Array.from({ length: 52 }, (_, i) => i + 1);
 
-  update(id: number, updateZipDto: UpdateZipDto) {
-    return `This action updates a #${id} zip`;
-  }
+    const availableNumbers = allNumbers.filter(
+      (number) => !usedNumbers.includes(number),
+    );
 
-  remove(id: number) {
-    return `This action removes a #${id} zip`;
+    return availableNumbers;
   }
 }

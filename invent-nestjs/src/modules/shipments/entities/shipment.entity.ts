@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { DecimalDataType } from 'sequelize';
 import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Company } from 'src/modules/companies/entities/company.entity';
 import { PackageType } from 'src/modules/package-types/entities/package-type.entity';
 
 @Table
@@ -17,14 +19,20 @@ export class Shipment extends Model {
   recipientName: string;
 
   @Column
-  weight: number;
+  weight: string;
   
   @Column
-  price: number;
+  price: string;
 
   @ForeignKey(() => PackageType)
-  companyId: number;
+  typeId: number;
 
   @BelongsTo(() => PackageType)
-  company: PackageType;
+  packageType: PackageType;
+
+  @ForeignKey(() => Company)
+  companyId: number;
+
+  @BelongsTo(() => Company)
+  company: Company;
 }

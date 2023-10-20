@@ -33,4 +33,10 @@ export class ShipmentsController {
   removeShipment(@Param('id') id: number) {
     return this.shipmentsService.remove(+id);
   }
+
+  @Get('weekShipments')
+  async getDailyShipmentsData() {
+    const data = await this.shipmentsService.getLastWeekDialyShipments();
+    return data;
+  }
 }

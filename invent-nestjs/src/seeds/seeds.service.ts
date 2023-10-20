@@ -18,34 +18,41 @@ export class SeedsService {
   async seedDataBase() {
     await this.sequelize.drop();
 
-    await this.sequelize.sync().then(() => {
-      this.seedUsers();
-      this.seedCompanies();
-      this.seedPackagesTypes();
-      this.seedShipments();
-    });
+    await this.sequelize.sync();
+
+    await this.seedUsers();
+    await this.seedCompanies();
+    await this.seedPackagesTypes();
+    await this.seedShipments();
   }
 
   async seedUsers() {
     const createUsers = users.map(
       async (user) => await this.usersService.create(user),
     );
+
+    return Promise.all(createUsers);
   }
 
   async seedCompanies() {
     const createCompanies = companies.map(
       async (company) => await this.companiesService.create(company),
     );
+
+    return Promise.all(createCompanies);
   }
 
   async seedShipments() {
     const createShipments = shipments.map(
       async (shipment) => await this.shipmentsService.create(shipment),
     );
+    return Promise.all(createShipments);
   }
+  
   async seedPackagesTypes() {
     const createTypes = packageType.map(
       async (type) => await this.packageTypeService.create(type),
     );
+    return Promise.all(createTypes);
   }
 }

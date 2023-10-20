@@ -4,6 +4,8 @@ import { UpdateShipmentDto } from './dto/update-shipment.dto';
 import { GetShipmentDto } from './dto/get-shipment.dto';
 import { Shipment } from './entities/shipment.entity';
 import { NotFoundError } from 'rxjs';
+import { Sequelize } from 'sequelize-typescript';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class ShipmentsService {
@@ -50,5 +52,27 @@ export class ShipmentsService {
     await shipment.destroy()
 
     return `Shipment has been removed`;
+  }
+
+  async getLastWeekDialyShipments() {
+     const today = new Date();
+
+     const oneWeekAgo = new Date(today);
+     oneWeekAgo.setDate(today.getDate() - 7);
+ 
+     const dailyData = await Shipment.findAll({
+       where: {
+         createdAt: {
+           [Op.between]: [oneWeekAgo, today],
+         },
+       },
+       attributes: [
+         [Sequelize.literal('DATE(createdAt)'), 'date'],
+         [Sequelize.literal('COUNT(*)'), 'count'],
+       ],
+       group: ['date'],
+     });
+ 
+     return dailyData;
   }
 }
