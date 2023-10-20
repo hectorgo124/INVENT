@@ -1,0 +1,25 @@
+<div class="h-full px-3 py-4 overflow-y-auto w-60 shadow-2xl backdrop-blur-sm">
+  <ul class="space-y-3 font-medium">
+    <li>
+      <h1 class="text-4xl font-semibold p-2">INVENT</h1>
+    </li>
+    <li *ngFor="let item of nav_list">
+      <a
+        [href]="item.url"
+        class="flex items-center hover:bg-gray-300 hover:shadow-inner p-2 rounded-md"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span class="ml-3">{{ item.title }}</span>
+      </a>
+    </li>
+    <li>
+      <a
+        (click)="signOut()"
+        class="cursor-pointer flex items-center hover:bg-gray-300 hover:shadow-inner p-2 rounded-md"
+      >
+        <mat-icon>logout</mat-icon>
+        <span class="ml-3">Sign out</span>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -2,13 +2,11 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
-  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
-  NgForm,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,11 +24,13 @@ export class SignInComponent implements OnInit {
   signInForm!: UntypedFormGroup;
   showAlert: boolean = false;
   loading: boolean = false;
+  alert: string = '';
+  success: boolean = false;
+
   /**
    * Constructor
    */
   constructor(
-    private _activatedRoute: ActivatedRoute,
     private _formBuilder: UntypedFormBuilder,
     private _router: Router,
     private _authApiService: AuthApiService,
@@ -79,17 +79,24 @@ export class SignInComponent implements OnInit {
     // Sign in
     this._authApiService.authControllerSignIn({ body: user }).subscribe({
       next: (value: any) => {
-        // Navigate to the redirect url
-        this._router.navigate(['']);
-        this._authService.accessToken = value.access_token;
+        this.success = true;
+        setTimeout(() => {
+          // Navigate to the redirect url
+          this._router.navigate(['']);
+          this._authService.accessToken = value.access_token;
+        }, 400);
       },
       error: (err) => {
+        this.alert = 'Incorrect username or password.';
+
+        setTimeout(() => {
+          this.alert = '';
+        }, 5000);
+
         // Re-enable the form
         this.signInForm.enable();
+        this.signInForm.reset();
         this.loading = false;
-
-        // Show the alert
-        this.showAlert = true;
       },
     });
   }

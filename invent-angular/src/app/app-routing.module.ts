@@ -17,6 +17,8 @@ const routes: Routes = [
     path: '',
     canMatch: [AuthGuard],
     children: [
+      { path: '**', redirectTo: '' },
+
       {
         path: '',
         loadChildren: () =>

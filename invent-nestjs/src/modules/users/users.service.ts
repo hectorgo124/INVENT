@@ -24,11 +24,15 @@ export class UsersService {
   }
 
   findOne(username: string): Promise<GetUserDto> {
-    return this.usersRepository.findOne<User>({
+    const user = this.usersRepository.findOne<User>({
       where: {
         username: username,
       },
     });
+
+    if(!user) throw new NotFoundException('User not found');
+
+    return user;
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {

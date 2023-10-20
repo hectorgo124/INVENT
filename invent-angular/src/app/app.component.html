@@ -1,3 +1,9 @@
-<div class="w-screen h-screen bg-gradient-to-b from-cyan-900 via-cyan-600 to-cyan-200">
+<div
+  class="w-screen h-screen bg-gradient-to-b from-white via-slate-300 to-slate-300"
+  [ngClass]="{'flex' : logged}"
+>
+  <ng-container *ngIf="logged">
+    <app-sidebar></app-sidebar>
+  </ng-container>
   <router-outlet></router-outlet>
 </div>
