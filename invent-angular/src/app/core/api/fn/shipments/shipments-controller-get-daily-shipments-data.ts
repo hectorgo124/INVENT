@@ -6,15 +6,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { Shipment } from '../../models/shipment';
 
-export interface ZipControllerRemove$Params {
-  id: string;
+export interface ShipmentsControllerGetDailyShipmentsData$Params {
 }
 
-export function zipControllerRemove(http: HttpClient, rootUrl: string, params: ZipControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-  const rb = new RequestBuilder(rootUrl, zipControllerRemove.PATH, 'delete');
+export function shipmentsControllerGetDailyShipmentsData(http: HttpClient, rootUrl: string, params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Shipment>>> {
+  const rb = new RequestBuilder(rootUrl, shipmentsControllerGetDailyShipmentsData.PATH, 'get');
   if (params) {
-    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -22,9 +21,9 @@ export function zipControllerRemove(http: HttpClient, rootUrl: string, params: Z
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<string>;
+      return r as StrictHttpResponse<Array<Shipment>>;
     })
   );
 }
 
-zipControllerRemove.PATH = '/zip/{id}';
+shipmentsControllerGetDailyShipmentsData.PATH = '/shipments/weekShipments';

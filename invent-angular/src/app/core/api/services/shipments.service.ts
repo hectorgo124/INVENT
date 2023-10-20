@@ -15,6 +15,8 @@ import { shipmentsControllerCreateShipment } from '../fn/shipments/shipments-con
 import { ShipmentsControllerCreateShipment$Params } from '../fn/shipments/shipments-controller-create-shipment';
 import { shipmentsControllerFindAll } from '../fn/shipments/shipments-controller-find-all';
 import { ShipmentsControllerFindAll$Params } from '../fn/shipments/shipments-controller-find-all';
+import { shipmentsControllerGetDailyShipmentsData } from '../fn/shipments/shipments-controller-get-daily-shipments-data';
+import { ShipmentsControllerGetDailyShipmentsData$Params } from '../fn/shipments/shipments-controller-get-daily-shipments-data';
 import { shipmentsControllerRemoveShipment } from '../fn/shipments/shipments-controller-remove-shipment';
 import { ShipmentsControllerRemoveShipment$Params } from '../fn/shipments/shipments-controller-remove-shipment';
 
@@ -33,7 +35,7 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerFindAll$Response(params?: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetShipmentDto>>> {
+  shipmentsControllerFindAll$Response(params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetShipmentDto>>> {
     return shipmentsControllerFindAll(this.http, this.rootUrl, params, context);
   }
 
@@ -43,7 +45,7 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerFindAll(params?: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<Array<GetShipmentDto>> {
+  shipmentsControllerFindAll(params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<Array<GetShipmentDto>> {
     return this.shipmentsControllerFindAll$Response(params, context).pipe(
       map((r: StrictHttpResponse<Array<GetShipmentDto>>): Array<GetShipmentDto> => r.body)
     );
@@ -71,6 +73,31 @@ export class ShipmentsService extends BaseService {
   shipmentsControllerCreateShipment(params: ShipmentsControllerCreateShipment$Params, context?: HttpContext): Observable<Shipment> {
     return this.shipmentsControllerCreateShipment$Response(params, context).pipe(
       map((r: StrictHttpResponse<Shipment>): Shipment => r.body)
+    );
+  }
+
+  /** Path part for operation `shipmentsControllerGetDailyShipmentsData()` */
+  static readonly ShipmentsControllerGetDailyShipmentsDataPath = '/shipments/weekShipments';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `shipmentsControllerGetDailyShipmentsData()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  shipmentsControllerGetDailyShipmentsData$Response(params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Shipment>>> {
+    return shipmentsControllerGetDailyShipmentsData(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `shipmentsControllerGetDailyShipmentsData$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  shipmentsControllerGetDailyShipmentsData(params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<Array<Shipment>> {
+    return this.shipmentsControllerGetDailyShipmentsData$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<Shipment>>): Array<Shipment> => r.body)
     );
   }
 

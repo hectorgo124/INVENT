@@ -6,18 +6,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { UpdateZipDto } from '../../models/update-zip-dto';
 
-export interface ZipControllerUpdate$Params {
-  id: string;
-      body: UpdateZipDto
+export interface ZipControllerGetAvailableZips$Params {
 }
 
-export function zipControllerUpdate(http: HttpClient, rootUrl: string, params: ZipControllerUpdate$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
-  const rb = new RequestBuilder(rootUrl, zipControllerUpdate.PATH, 'patch');
+export function zipControllerGetAvailableZips(http: HttpClient, rootUrl: string, params?: ZipControllerGetAvailableZips$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<number>>> {
+  const rb = new RequestBuilder(rootUrl, zipControllerGetAvailableZips.PATH, 'get');
   if (params) {
-    rb.path('id', params.id, {});
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -25,9 +20,9 @@ export function zipControllerUpdate(http: HttpClient, rootUrl: string, params: Z
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<string>;
+      return r as StrictHttpResponse<Array<number>>;
     })
   );
 }
 
-zipControllerUpdate.PATH = '/zip/{id}';
+zipControllerGetAvailableZips.PATH = '/zip/available';

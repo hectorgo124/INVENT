@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query
 } from '@nestjs/common';
 import { ShipmentsService } from './shipments.service';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
@@ -25,8 +26,11 @@ export class ShipmentsController {
   }
 
   @Get()
-  findAll(): Promise<GetShipmentDto[]> {
-    return this.shipmentsService.findAll();
+  findAll(
+    @Query('page') page : number = 1,
+    @Query('limit') limit : number = 10,
+  ): Promise<GetShipmentDto[]> {
+    return this.shipmentsService.findAll((page),(limit));
   }
 
   @Delete(':id')

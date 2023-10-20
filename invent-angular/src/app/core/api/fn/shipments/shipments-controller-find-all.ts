@@ -9,11 +9,15 @@ import { RequestBuilder } from '../../request-builder';
 import { GetShipmentDto } from '../../models/get-shipment-dto';
 
 export interface ShipmentsControllerFindAll$Params {
+  page: number;
+  limit: number;
 }
 
-export function shipmentsControllerFindAll(http: HttpClient, rootUrl: string, params?: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetShipmentDto>>> {
+export function shipmentsControllerFindAll(http: HttpClient, rootUrl: string, params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetShipmentDto>>> {
   const rb = new RequestBuilder(rootUrl, shipmentsControllerFindAll.PATH, 'get');
   if (params) {
+    rb.query('page', params.page, {});
+    rb.query('limit', params.limit, {});
   }
 
   return http.request(

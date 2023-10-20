@@ -4,7 +4,7 @@ import { Shipment } from '../models/shipment';
 export interface PackageType {
   description: string;
   formula: string;
-  max: number;
-  min: number;
+  max: string;
+  min: string;
   shipments: Array<Shipment>;
 }
