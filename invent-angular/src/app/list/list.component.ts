@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -9,6 +9,9 @@ export class ListComponent implements OnInit {
   @Input() data: any[] = [];
   @Input() total: number = 0;
   @Input() columns!: { title: string; id: string }[];
+  @Output() onNewPaginator: EventEmitter<{ pageIndex: number; size: number }> =
+    new EventEmitter<{ pageIndex: number; size: number }>();
+
   displayedColumns: string[] = [];
 
   ngOnInit(): void {
@@ -16,5 +19,12 @@ export class ListComponent implements OnInit {
       this.columns.forEach((col) => {
         this.displayedColumns.push(col.id);
       });
+  }
+
+  newPaginator(event: any) {
+    this.onNewPaginator.emit({
+      pageIndex: event.pageIndex + 1,
+      size: event.pageSize,
+    });
   }
 }

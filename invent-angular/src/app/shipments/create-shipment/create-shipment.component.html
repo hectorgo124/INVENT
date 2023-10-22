@@ -1,0 +1,92 @@
+<div class="md:max-w-full max-h-[700px] grid md:grid-cols-2 overflow-hidden p-8 gap-8">
+    <section class="flex flex-col gap-8">
+        <h1 class="text-2xl font-bold tracking-wide text-center">
+            Create shipment
+        </h1>
+        <form class="w-full mt-2 grid sm:grid-cols-1 xl:grid-cols-2 gap-8" *ngIf="shipmentForm"
+            [formGroup]="shipmentForm">
+            <div class="flex flex-col gt-xs:flex-row max-h-12">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-label>Address</mat-label>
+                    <input maxlength="50" matInput formControlName="address" />
+                </mat-form-field>
+            </div>
+            <div class="flex flex-col gt-xs:flex-row max-h-12">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-label>ZIP</mat-label>
+                    <input type="number" maxlength="5" minlength="4" matInput formControlName="zip" />
+                </mat-form-field>
+            </div>
+            <div class="flex flex-col gt-xs:flex-row max-h-12">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-label>Sender</mat-label>
+                    <input maxlength="30" matInput formControlName="sender" />
+                </mat-form-field>
+            </div>
+            <div class="flex flex-col gt-xs:flex-row max-h-12">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-label>Recipient</mat-label>
+                    <input maxlength="30" matInput formControlName="recipient" />
+                </mat-form-field>
+            </div>
+            <div class="flex flex-col gt-xs:flex-row max-h-12">
+                <mat-form-field class="flex-auto gt-xs:pr-3">
+                    <mat-label>Weight</mat-label>
+                    <input type="number" maxlength="30" matInput formControlName="weight" />
+                    <span matSuffix class="opacity-90 px-5">kg</span>
+                </mat-form-field>
+            </div>
+        </form>
+
+    </section>
+
+    <section class="flex flex-col gap-5">
+
+        <h1 class="text-2xl font-bold tracking-wide">
+            Shipment summary:
+        </h1>
+        <div *ngIf="shipmentForm.get('address')?.value && shipmentForm.controls['address'].valid">
+            <h3 class="text-lg font-semibold">
+                Address:
+            </h3>
+            <span>{{shipmentForm.get('address')?.value}}</span>
+        </div>
+        <div *ngIf="shipmentForm.get('zip')?.value && shipmentForm.controls['zip'].valid">
+            <h3 class="text-lg font-semibold">
+                Zip:
+            </h3>
+            <span>{{shipmentForm.get('zip')?.value}}</span>
+        </div>
+        <div *ngIf="shipmentForm.get('sender')?.value && shipmentForm.controls['sender'].valid">
+            <h3 class="text-lg font-semibold">
+                Sender:
+            </h3>
+            <span>{{shipmentForm.get('sender')?.value}}</span>
+        </div>
+        <div *ngIf="shipmentForm.get('recipient')?.value && shipmentForm.controls['recipient'].valid">
+            <h3 class="text-lg font-semibold">
+                Recipient:
+            </h3>
+            <span>{{shipmentForm.get('recipient')?.value}}</span>
+        </div>
+        <div *ngIf="shipmentForm.get('weight')?.value && shipmentForm.controls['weight'].valid">
+            <h3 class="text-lg font-semibold">
+                Weight:
+            </h3>
+            <span>{{shipmentForm.get('weight')?.value}} kg</span>
+        </div>
+    </section>
+
+    <section class="flex justify-end col-span-2" *ngIf="price >= 0">
+        <h3>Total price: {{price}} €</h3>
+    </section>
+
+    <div mat-dialog-actions class="px-6 py-2 w-full flex !justify-end col-span-2" *ngIf="shipmentForm">
+        <button mat-raised-button color="primary" [disabled]="shipmentForm.invalid" (click)=" createShipment()">
+            Create </button>
+
+        <button mat-raised-button mat-dialog-close color="warn">
+            Close
+        </button>
+    </div>
+</div>

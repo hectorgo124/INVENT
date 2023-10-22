@@ -35,8 +35,8 @@ async function bootstrap() {
   app.use(cors(corsOptions))
 
   // IMPORTANTE COMENTAR PARA NO REINICIAR LA BASE DE DATOS
-  // const seedsService = app.get(SeedsService);
-  // await seedsService.seedDataBase();
+  const seedsService = app.get(SeedsService);
+  await seedsService.seedDataBase();
 
   await app.listen(3000);
 }

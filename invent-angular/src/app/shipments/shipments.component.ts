@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ShipmentsService } from '../core/api/services';
 import { GetCompanyDto, Shipment } from '../core/api/models';
 import { Column } from '../models/column';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateShipmentComponent } from './create-shipment/create-shipment.component';
 
 @Component({
   selector: 'app-shipments',
@@ -13,11 +15,18 @@ export class ShipmentsComponent implements OnInit {
   companies: GetCompanyDto[] = [];
   columns: Column[] = [];
   total: number = 0;
-  constructor(private _shipmentsService: ShipmentsService) {}
+  constructor(
+    private _shipmentsService: ShipmentsService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
+    this.getShipments(10, 1);
+  }
+
+  getShipments(limit: number, page: number) {
     this._shipmentsService
-      .shipmentsControllerFindAll({ limit: 10, page: 1 })
+      .shipmentsControllerFindAll({ limit, page })
       .subscribe({
         next: (res: any) => {
           res = JSON.parse(res);
@@ -34,5 +43,20 @@ export class ShipmentsComponent implements OnInit {
           }));
         },
       });
+  }
+
+  openCreateShipment() {
+    const createDialog = this.dialog.open(CreateShipmentComponent, {
+      enterAnimationDuration: '300',
+      exitAnimationDuration: '300',
+      autoFocus: false,
+      disableClose: true,
+    });
+
+    createDialog.afterClosed().subscribe((created: boolean) => this.ngOnInit());
+  }
+
+  newPaginator(event: any) {
+    this.getShipments(event.size, event.pageIndex);
   }
 }

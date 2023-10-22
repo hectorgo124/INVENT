@@ -77,28 +77,6 @@ export class ShipmentsService {
     return `Shipment has been removed`;
   }
 
-  // async getLastWeekDialyShipments() {
-  //   const today = new Date();
-
-  //   const oneWeekAgo = new Date(today);
-  //   oneWeekAgo.setDate(today.getDate() - 7);
-
-  //   const dailyData = await Shipment.findAll({
-  //     where: {
-  //       createdAt: {
-  //         [Op.between]: [oneWeekAgo, today],
-  //       },
-  //     },
-  //     attributes: [
-  //       [Sequelize.literal('DATE(createdAt)'), 'date'],
-  //       [Sequelize.literal('COUNT(*)'), 'count'],
-  //     ],
-  //     group: ['date'],
-  //   });
-
-  //   return dailyData;
-  // }
-
   async getLastWeekDailyShipments() {
     const today = new Date();
     const oneWeekAgo = new Date(today);
@@ -107,13 +85,11 @@ export class ShipmentsService {
     const dateRange = [];
     let currentDate = new Date(oneWeekAgo);
   
-    // Crear un conjunto de fechas en el rango de 5 días anteriores hasta hoy
     while (currentDate <= today) {
       dateRange.push(new Date(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
   
-    // Realizar la consulta para contar los envíos
     const dailyData = await Shipment.findAll({
       where: {
         createdAt: {
@@ -127,9 +103,6 @@ export class ShipmentsService {
       group: ['date'],
     });
 
-    console.log(dailyData)
-  
-    // Mapear los resultados para incluir los días sin envíos
     const resultData = dateRange.map((date) => {
       const formattedDate = date.toISOString().slice(0, 10);
 

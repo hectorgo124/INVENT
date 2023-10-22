@@ -50,16 +50,16 @@ export const users: CreateUserDto[] = [
 
 export const companies: any = [
   {
+    name: 'INVENT',
+    zips: [],
+  },
+  {
     name: 'Correos',
     zips: [15, 16, 17, 18, 19],
   },
   {
     name: 'Seur',
     zips: [20, 21, 22, 23, 24, 25],
-  },
-  {
-    name: 'INVENT',
-    zips: [],
   },
 ];
 
