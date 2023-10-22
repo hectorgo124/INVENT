@@ -12,6 +12,8 @@ export class ListComponent implements OnInit {
   @Output() onNewPaginator: EventEmitter<{ pageIndex: number; size: number }> =
     new EventEmitter<{ pageIndex: number; size: number }>();
 
+  @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
+
   displayedColumns: string[] = [];
 
   ngOnInit(): void {
@@ -26,5 +28,9 @@ export class ListComponent implements OnInit {
       pageIndex: event.pageIndex + 1,
       size: event.pageSize,
     });
+  }
+
+  deleteClicked(event: any) {
+    this.onDelete.emit(event)
   }
 }

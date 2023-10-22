@@ -4,6 +4,7 @@ import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GetCompanyDto } from './dto/get-company.dto';
+import { Company } from './entities/company.entity';
 
 @ApiBearerAuth()
 @ApiTags('Companies')
@@ -22,7 +23,7 @@ export class CompaniesController {
   }
 
   @Get()
-  findAll() {
+  findAll() : Promise<Company[]> {
     return this.companiesService.findAll();
   }
 

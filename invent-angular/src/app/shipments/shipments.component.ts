@@ -4,6 +4,7 @@ import { GetCompanyDto, Shipment } from '../core/api/models';
 import { Column } from '../models/column';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateShipmentComponent } from './create-shipment/create-shipment.component';
+import { ConfirmationComponent } from '../shared/components/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-shipments',
@@ -35,12 +36,12 @@ export class ShipmentsComponent implements OnInit {
 
           let columnsProp = Object.keys(this.shipments[0]);
 
-          columnsProp = columnsProp.splice(0, columnsProp.length - 2);
-
           this.columns = columnsProp.map((col) => ({
             id: col,
             title: col.toUpperCase(),
           }));
+
+          this.columns.push({ id: 'operations', title: '' });
         },
       });
   }
@@ -58,5 +59,25 @@ export class ShipmentsComponent implements OnInit {
 
   newPaginator(event: any) {
     this.getShipments(event.size, event.pageIndex);
+  }
+
+  deleteShipment(shipment: any) {
+    const confirmation = this.dialog.open(ConfirmationComponent, {
+      data: {
+        title: 'Delete shipment',
+        desc: 'Are you sure you want to delete the shipment?',
+      },
+      enterAnimationDuration: '300',
+      exitAnimationDuration: '300',
+      autoFocus: false,
+      disableClose: true,
+    });
+
+    confirmation.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm)
+        this._shipmentsService
+          .shipmentsControllerRemoveShipment({ id: shipment.id })
+          .subscribe((res) => this.ngOnInit());
+    });
   }
 }

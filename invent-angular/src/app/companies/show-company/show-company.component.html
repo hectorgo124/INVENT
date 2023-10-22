@@ -24,7 +24,7 @@
                 <h3 class="text-xl p-4">
                     Zips:
                 </h3>
-                <ul class="space-y-4 max-h-80 overflow-y-scroll w-[50%]">
+                <ul class="space-y-4 max-h-80 overflow-y-auto w-[50%]">
                     <li *ngFor="let zip of compZips; let i = index"
                         class="pl-5 text-lg flex items-center justify-between">
                         <span>{{zip.number | zipPipe}}</span>

@@ -1,16 +1,20 @@
-<div class="mat-elevation-z8 ">
+<div class="hidden md:block mat-elevation-z8 ">
     <div class="max-h-full overflow-auto">
         <table mat-table [dataSource]="data">
             <!-- ID Column -->
             <ng-container *ngFor="let col of columns" matColumnDef="{{col.id}}">
-                <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
-                <td mat-cell *matCellDef="let row">
+                <th mat-header-cell *matHeaderCellDef> <ng-container
+                        *ngIf="col.id !== 'companyName'; else companyName">{{col.title}} </ng-container>
+                    <ng-template #companyName>COMPANY</ng-template>
+                </th>
+                <td mat-cell *matCellDef="let row;">
                     <span>{{row[col.id]}}</span>
                     <span *ngIf="col.id == 'min'|| col.id == 'max' || col.id == 'weight'">{{row[col.id] ? '' : '∞'}}
                         kg</span>
                     <span *ngIf="col.id == 'price'">€</span>
+                    <mat-icon *ngIf="col.id == 'operations'" class="cursor-pointer text-red-500"
+                        matTooltip="Delete shipment" (click)="deleteClicked(row)">delete</mat-icon>
                 </td>
-
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -21,4 +25,27 @@
 
     <mat-paginator *ngIf="total > 10" [length]="total" [pageSizeOptions]="[10, 25, 50]" (page)="newPaginator($event)"
         aria-label="Select page of users"></mat-paginator>
+</div>
+
+<div class="flex md:hidden flex-col gap-8">
+    <ng-container *ngFor="let item of data">
+        <div class="w-full p-8 bg-slate-100 flex flex-col gap-3 rounded-md shadow-lg">
+            <ng-container *ngFor="let col of columns">
+                <div class="flex gap-2" *ngIf="col.id !== 'operations'; else operations">
+                    <h3 class="font-medium">
+                        {{col.title}}:
+                    </h3>
+                    <span>
+                        {{item[col.id]}}
+                    </span>
+                </div>
+                <ng-template #operations>
+                    <div class="flex justify-center">
+                        <mat-icon class="cursor-pointer text-red-500" matTooltip="Delete shipment"
+                            (click)="deleteClicked(item)">delete</mat-icon>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </div>
+    </ng-container>
 </div>

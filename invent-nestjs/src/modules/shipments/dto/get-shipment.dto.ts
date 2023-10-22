@@ -1,4 +1,6 @@
 import { PartialType } from '@nestjs/swagger';
 import { Shipment } from '../entities/shipment.entity';
 
-export class GetShipmentDto extends PartialType(Shipment) {}
+export class GetShipmentDto extends PartialType(Shipment) {
+    companyName? : string
+}

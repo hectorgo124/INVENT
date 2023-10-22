@@ -3,7 +3,9 @@
         <h1 class="text-3xl">
             Shipments
         </h1>
-        <button mat-raised-button (click)="openCreateShipment()" class="!bg-blizzard-blue-950 !text-white"><span>CREATE</span> <mat-icon>add</mat-icon></button>
+        <button mat-raised-button (click)="openCreateShipment()"
+            class="!bg-blizzard-blue-950 !text-white"><span>CREATE</span> <mat-icon>add</mat-icon></button>
     </section>
-    <app-list *ngIf="columns.length > 0" [total]="total" [data]="shipments" [columns]="columns" (onNewPaginator)="newPaginator($event)"></app-list>
+    <app-list *ngIf="columns.length > 0" [total]="total" [data]="shipments" [columns]="columns"
+        (onNewPaginator)="newPaginator($event)" (onDelete)="deleteShipment($event)"></app-list>
 </div>

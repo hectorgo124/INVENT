@@ -9,6 +9,7 @@ import { ZipService } from '../zip/zip.service';
 import { zip } from 'rxjs';
 import { Shipment } from '../shipments/entities/shipment.entity';
 import { Sequelize } from 'sequelize-typescript';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class CompaniesService {
@@ -31,8 +32,17 @@ export class CompaniesService {
     return company;
   }
 
-  async findAll() {
-    return this.companiesRepository.findAll<Company>();
+  async findAll(): Promise<Company[]> {
+    const companies = await this.companiesRepository.findAll<Company>({
+      where: {
+        id: {
+          [Op.ne]: 1,
+        },
+      },
+    });
+
+    return companies;
+    this.companiesRepository.findAll<Company>();
   }
 
   async findOne(id: number): Promise<GetCompanyDto> {
@@ -53,17 +63,20 @@ export class CompaniesService {
       attributes: [
         'id',
         'name',
-        [Sequelize.fn('COUNT', Sequelize.col('shipments.id')), 'totalShipments'],
+        [
+          Sequelize.fn('COUNT', Sequelize.col('shipments.id')),
+          'totalShipments',
+        ],
       ],
       group: ['Company.id', 'Company.name'],
     });
-  
+
     return companies.map((company) => ({
       company: company.get('name'),
       totalShipments: company.get('totalShipments'),
     }));
   }
-  
+
   async update(id: number, updateCompanyDto: UpdateCompanyDto) {
     const company = await this.findOne(id);
     await this.zipsService.deleteFromCompany(id);

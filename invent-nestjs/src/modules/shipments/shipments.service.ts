@@ -10,6 +10,7 @@ import { GetShipmentDto } from './dto/get-shipment.dto';
 import { Shipment } from './entities/shipment.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { Op } from 'sequelize';
+import { Company } from '../companies/entities/company.entity';
 
 @Injectable()
 export class ShipmentsService {
@@ -37,7 +38,7 @@ export class ShipmentsService {
         offset: (page - 1) * limit,
         limit: limit,
         order: [['createdAt', 'DESC']],
-        subQuery: false,
+        include: [{ model: Company, as: 'company' }],
       }),
       this.shipmentsRepository.count(),
     ]);
@@ -74,7 +75,7 @@ export class ShipmentsService {
 
     await shipment.destroy();
 
-    return `Shipment has been removed`;
+    return shipment;
   }
 
   async getLastWeekDailyShipments() {
@@ -118,6 +119,7 @@ export class ShipmentsService {
   
 
   toDTO(shipment: Shipment): GetShipmentDto {
+    const companyName : string = shipment.company.name;
     return {
       id: shipment.id,
       address: shipment.address,
@@ -126,8 +128,7 @@ export class ShipmentsService {
       recipient: shipment.recipient,
       weight: shipment.weight,
       price: shipment.price,
-      typeId: shipment.typeId,
-      companyId: shipment.companyId,
+      companyName
     };
   }
 }

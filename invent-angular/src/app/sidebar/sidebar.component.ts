@@ -9,7 +9,7 @@ import { ConfirmationComponent } from '../shared/components/confirmation/confirm
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
-  isVisible: boolean = true;
+  isVisible: boolean = false;
 
   nav_list: {
     title: string;
