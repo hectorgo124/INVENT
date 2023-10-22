@@ -6,22 +6,21 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Shipment } from '../../models/shipment';
 
 export interface ShipmentsControllerGetDailyShipmentsData$Params {
 }
 
-export function shipmentsControllerGetDailyShipmentsData(http: HttpClient, rootUrl: string, params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Shipment>>> {
+export function shipmentsControllerGetDailyShipmentsData(http: HttpClient, rootUrl: string, params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
   const rb = new RequestBuilder(rootUrl, shipmentsControllerGetDailyShipmentsData.PATH, 'get');
   if (params) {
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<Shipment>>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }

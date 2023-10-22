@@ -9,6 +9,5 @@ export class CardComponent {
 
   @Input() title : string = '';
   @Input() number : number = 0;
-
   
 }

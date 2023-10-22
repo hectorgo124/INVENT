@@ -6,16 +6,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { GetCompanyDto } from '../../models/get-company-dto';
 
-export interface CompaniesControllerFindOne$Params {
-  id: string;
+export interface CompaniesControllerGetTotalNCompanies$Params {
 }
 
-export function companiesControllerFindOne(http: HttpClient, rootUrl: string, params: CompaniesControllerFindOne$Params, context?: HttpContext): Observable<StrictHttpResponse<GetCompanyDto>> {
-  const rb = new RequestBuilder(rootUrl, companiesControllerFindOne.PATH, 'get');
+export function companiesControllerGetTotalNCompanies(http: HttpClient, rootUrl: string, params?: CompaniesControllerGetTotalNCompanies$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+  const rb = new RequestBuilder(rootUrl, companiesControllerGetTotalNCompanies.PATH, 'get');
   if (params) {
-    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -23,9 +20,9 @@ export function companiesControllerFindOne(http: HttpClient, rootUrl: string, pa
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<GetCompanyDto>;
+      return (r as HttpResponse<any>).clone({ body: parseFloat(String((r as HttpResponse<any>).body)) }) as StrictHttpResponse<number>;
     })
   );
 }
 
-companiesControllerFindOne.PATH = '/companies/{id}';
+companiesControllerGetTotalNCompanies.PATH = '/companies/companiesNumber';

@@ -17,8 +17,13 @@ export class CompaniesController {
     return this.companiesService.create(createCompanyDto);
   }
   
+  @Get('companiesNumber')
+  getTotalNCompanies() : Promise<number> {
+    return this.companiesService.getTotalNCompanies();
+  }
+
   @Get('totalShipmentsByCompany')
-  totalShipmentsByCompany() {
+  totalShipmentsByCompany() : Promise<{company: string, totalShipments: any}[]>{
     return this.companiesService.getTotalShipmentsByCompany();
   }
 
@@ -27,10 +32,6 @@ export class CompaniesController {
     return this.companiesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) : Promise<GetCompanyDto>  {
-    return this.companiesService.findOne(+id);
-  }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCompanyDto: UpdateCompanyDto) {
     return this.companiesService.update(+id, updateCompanyDto);

@@ -9,7 +9,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { AuthService as AuthApiService } from '../core/api/services';
 import { SignInUserDto } from '../core/api/models';
 import { AuthService } from '../core/auth/auth.service';
@@ -27,9 +27,6 @@ export class SignInComponent implements OnInit {
   alert: string = '';
   success: boolean = false;
 
-  /**
-   * Constructor
-   */
   constructor(
     private _formBuilder: UntypedFormBuilder,
     private _router: Router,
@@ -38,13 +35,6 @@ export class SignInComponent implements OnInit {
     private _authService: AuthService
   ) {}
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
     // Create the form
     this.signInForm = this._formBuilder.group({
@@ -55,13 +45,6 @@ export class SignInComponent implements OnInit {
     this._cdr.detectChanges();
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Sign in
-   */
   signIn(): void {
     // Disable the form
     this.signInForm.disable();

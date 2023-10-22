@@ -51,6 +51,7 @@ export class HomeComponent {
   total: number = 0;
   pieChartData: { company: string; totalShipments: number }[] = [];
   chartData: any = [];
+  nCompanies! : number;
 
   constructor(
     private _shipmentsService: ShipmentsService,
@@ -61,6 +62,11 @@ export class HomeComponent {
     this.getLast5Shipments();
     this.getTotalShipments();
     this.getDialyShipments();
+    this.getNCompanies();
+  }
+
+  getNCompanies() {
+    this.companiesService.companiesControllerGetTotalNCompanies().subscribe((res)=> this.nCompanies = res);
   }
 
   getLast5Shipments() {
@@ -99,8 +105,8 @@ export class HomeComponent {
     this._shipmentsService
       .shipmentsControllerGetDailyShipmentsData()
       .subscribe({
-        next: (res) => {
-          this.chartData = res;
+        next: (res : any) => {
+          this.chartData = JSON.parse(res);
           this.initChart();
         },
       });
@@ -193,19 +199,6 @@ export class HomeComponent {
       title: {
         text: 'Total companies shipments',
       },
-      // responsive: [
-      //   {
-      //     breakpoint: 480,
-      //     options: {
-      //       chart: {
-      //         width: 200,
-      //       },
-      //       legend: {
-      //         position: 'bottom',
-      //       },
-      //     },
-      //   },
-      // ],
     };
   }
 }

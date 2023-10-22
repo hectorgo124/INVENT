@@ -13,8 +13,8 @@ import { companiesControllerCreate } from '../fn/companies/companies-controller-
 import { CompaniesControllerCreate$Params } from '../fn/companies/companies-controller-create';
 import { companiesControllerFindAll } from '../fn/companies/companies-controller-find-all';
 import { CompaniesControllerFindAll$Params } from '../fn/companies/companies-controller-find-all';
-import { companiesControllerFindOne } from '../fn/companies/companies-controller-find-one';
-import { CompaniesControllerFindOne$Params } from '../fn/companies/companies-controller-find-one';
+import { companiesControllerGetTotalNCompanies } from '../fn/companies/companies-controller-get-total-n-companies';
+import { CompaniesControllerGetTotalNCompanies$Params } from '../fn/companies/companies-controller-get-total-n-companies';
 import { companiesControllerRemove } from '../fn/companies/companies-controller-remove';
 import { CompaniesControllerRemove$Params } from '../fn/companies/companies-controller-remove';
 import { companiesControllerTotalShipmentsByCompany } from '../fn/companies/companies-controller-total-shipments-by-company';
@@ -80,6 +80,31 @@ export class CompaniesService extends BaseService {
     );
   }
 
+  /** Path part for operation `companiesControllerGetTotalNCompanies()` */
+  static readonly CompaniesControllerGetTotalNCompaniesPath = '/companies/companiesNumber';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `companiesControllerGetTotalNCompanies()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  companiesControllerGetTotalNCompanies$Response(params?: CompaniesControllerGetTotalNCompanies$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+    return companiesControllerGetTotalNCompanies(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `companiesControllerGetTotalNCompanies$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  companiesControllerGetTotalNCompanies(params?: CompaniesControllerGetTotalNCompanies$Params, context?: HttpContext): Observable<number> {
+    return this.companiesControllerGetTotalNCompanies$Response(params, context).pipe(
+      map((r: StrictHttpResponse<number>): number => r.body)
+    );
+  }
+
   /** Path part for operation `companiesControllerTotalShipmentsByCompany()` */
   static readonly CompaniesControllerTotalShipmentsByCompanyPath = '/companies/totalShipmentsByCompany';
 
@@ -102,31 +127,6 @@ export class CompaniesService extends BaseService {
   companiesControllerTotalShipmentsByCompany(params?: CompaniesControllerTotalShipmentsByCompany$Params, context?: HttpContext): Observable<void> {
     return this.companiesControllerTotalShipmentsByCompany$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `companiesControllerFindOne()` */
-  static readonly CompaniesControllerFindOnePath = '/companies/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `companiesControllerFindOne()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  companiesControllerFindOne$Response(params: CompaniesControllerFindOne$Params, context?: HttpContext): Observable<StrictHttpResponse<GetCompanyDto>> {
-    return companiesControllerFindOne(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `companiesControllerFindOne$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  companiesControllerFindOne(params: CompaniesControllerFindOne$Params, context?: HttpContext): Observable<GetCompanyDto> {
-    return this.companiesControllerFindOne$Response(params, context).pipe(
-      map((r: StrictHttpResponse<GetCompanyDto>): GetCompanyDto => r.body)
     );
   }
 

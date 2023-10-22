@@ -52,7 +52,7 @@ export class CompaniesService {
 
     return company;
   }
-  async getTotalShipmentsByCompany() {
+  async getTotalShipmentsByCompany() : Promise<{company: string, totalShipments: any}[]> {
     const companies = await this.companiesRepository.findAll({
       include: [
         {
@@ -98,5 +98,10 @@ export class CompaniesService {
     await company.destroy();
 
     return company;
+  }
+
+  async getTotalNCompanies() : Promise<number>{
+
+    return await this.companiesRepository.count();
   }
 }

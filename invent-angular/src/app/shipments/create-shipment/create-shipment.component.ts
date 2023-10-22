@@ -4,8 +4,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import {
   CreateShipmentDto,
   GetPackageTypeDto,
-  PackageType,
-  Shipment,
   Zip,
 } from 'src/app/core/api/models';
 import { PackagesTypesService, ShipmentsService, ZipService } from 'src/app/core/api/services';

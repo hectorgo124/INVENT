@@ -7,21 +7,9 @@ import { AuthService } from '../auth.service';
   providedIn: 'root',
 })
 export class NoAuthGuard implements CanMatch {
-  /**
-   * Constructor
-   */
+  
   constructor(private _authService: AuthService, private _router: Router) {}
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Can match
-   *
-   * @param route
-   * @param segments
-   */
   canMatch(
     route: Route,
     segments: UrlSegment[]
@@ -33,15 +21,6 @@ export class NoAuthGuard implements CanMatch {
     return this._check();
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Private methods
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Check the authenticated status
-   *
-   * @private
-   */
   private _check(): Observable<any> {
     return this._authService.check().pipe(
       switchMap((authenticated) => {

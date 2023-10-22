@@ -1,7 +1,6 @@
 <div class="hidden md:block mat-elevation-z8 ">
     <div class="max-h-full overflow-auto">
         <table mat-table [dataSource]="data">
-            <!-- ID Column -->
             <ng-container *ngFor="let col of columns" matColumnDef="{{col.id}}">
                 <th mat-header-cell *matHeaderCellDef> <ng-container
                         *ngIf="col.id !== 'companyName'; else companyName">{{col.title}} </ng-container>

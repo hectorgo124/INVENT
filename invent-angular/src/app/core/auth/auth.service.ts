@@ -18,8 +18,6 @@ export class AuthService {
   private _refresh$ = new Subject<void>();
 
   constructor(
-    private _httpClient: HttpClient,
-    private _authService: ApiAuthService,
     private _router: Router
   ) {}
  
@@ -36,24 +34,18 @@ export class AuthService {
     return localStorage.getItem('accessToken') ?? '';
   }
 
-  /**
-   * Sign out
-   */
   signOut(): Observable<any> {
-    // Remove the access token from the local storage
     localStorage.removeItem('accessToken');
     this._refresh$.next();
 
-    // Set the authenticated flag to false
     this._authenticated = false;
 
     this._router.navigate(['sign-in']);
-    // Return the observable
+
     return of(true);
   }
 
   check(): Observable<boolean> {
-    // Check the access token availability
     if (!this.accessToken) {
       return of(false);
     }

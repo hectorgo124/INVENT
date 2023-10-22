@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PackagesTypesService } from '../core/api/services';
-import { GetPackageTypeDto, PackageType } from '../core/api/models';
+import { GetPackageTypeDto } from '../core/api/models';
 import { Column } from '../models/column';
 
 @Component({

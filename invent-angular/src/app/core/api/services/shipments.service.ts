@@ -84,7 +84,7 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerGetDailyShipmentsData$Response(params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<Shipment>>> {
+  shipmentsControllerGetDailyShipmentsData$Response(params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
     return shipmentsControllerGetDailyShipmentsData(this.http, this.rootUrl, params, context);
   }
 
@@ -94,9 +94,9 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerGetDailyShipmentsData(params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<Array<Shipment>> {
+  shipmentsControllerGetDailyShipmentsData(params?: ShipmentsControllerGetDailyShipmentsData$Params, context?: HttpContext): Observable<void> {
     return this.shipmentsControllerGetDailyShipmentsData$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<Shipment>>): Array<Shipment> => r.body)
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 
@@ -109,7 +109,7 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerRemoveShipment$Response(params: ShipmentsControllerRemoveShipment$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+  shipmentsControllerRemoveShipment$Response(params: ShipmentsControllerRemoveShipment$Params, context?: HttpContext): Observable<StrictHttpResponse<Shipment>> {
     return shipmentsControllerRemoveShipment(this.http, this.rootUrl, params, context);
   }
 
@@ -119,9 +119,9 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerRemoveShipment(params: ShipmentsControllerRemoveShipment$Params, context?: HttpContext): Observable<string> {
+  shipmentsControllerRemoveShipment(params: ShipmentsControllerRemoveShipment$Params, context?: HttpContext): Observable<Shipment> {
     return this.shipmentsControllerRemoveShipment$Response(params, context).pipe(
-      map((r: StrictHttpResponse<string>): string => r.body)
+      map((r: StrictHttpResponse<Shipment>): Shipment => r.body)
     );
   }
 

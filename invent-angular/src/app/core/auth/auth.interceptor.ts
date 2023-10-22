@@ -18,8 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // Clone the request object
-    console.log('interceptado');
     let newReq = req.clone();
 
     if (this._authService.accessToken) {

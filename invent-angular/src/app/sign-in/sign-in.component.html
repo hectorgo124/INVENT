@@ -1,15 +1,11 @@
 <div class="min-h-screen flex items-center justify-center">
-  <div class="max-w-md w-full bg-white space-y-3 shadow-md p-8 rounded-md" [ngClass]="{'blur-out' : success, 'blur-in' : !success}">
+  <div class="max-w-md w-full bg-white space-y-3 shadow-md p-8 rounded-md"
+    [ngClass]="{'blur-out' : success, 'blur-in' : !success}">
     <section class="flex flex-col gap-2">
       <h1 class="text-3xl font-medium">Sign in</h1>
       <h3 class="text-lg font-light">Access to Invent</h3>
     </section>
-    <!-- Sign in form -->
-    <form
-      class="flex flex-wrap gap-5"
-      [formGroup]="signInForm"
-      #signInNgForm="ngForm"
-    >
+    <form class="flex flex-wrap gap-5" [formGroup]="signInForm" #signInNgForm="ngForm">
       <ng-container *ngIf="alert">
         <span class="bg-red-300 text-red-600 border border-red-600 rounded-sm w-full p-4">
           {{ alert }}
@@ -23,56 +19,25 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Password field -->
       <mat-form-field class="w-full">
         <mat-label>Password</mat-label>
-        <input
-          id="password"
-          matInput
-          type="password"
-          [formControlName]="'password'"
-          #passwordField
-        />
-        <button
-          mat-icon-button
-          type="button"
-          (click)="
+        <input id="password" matInput type="password" [formControlName]="'password'" #passwordField />
+        <button mat-icon-button type="button" (click)="
             passwordField.type === 'password'
               ? (passwordField.type = 'text')
               : (passwordField.type = 'password')
-          "
-          matSuffix
-        >
-          <mat-icon
-            class="icon-size-5"
-            *ngIf="passwordField.type === 'password'"
-            >visibility</mat-icon
-          >
-          <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'text'"
-            >visibility_off</mat-icon
-          >
+          " matSuffix>
+          <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'password'">visibility</mat-icon>
+          <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'text'">visibility_off</mat-icon>
         </button>
       </mat-form-field>
 
-      <!-- Submit button -->
-      <button
-        class="w-full py-3"
-        mat-raised-button
-        [disabled]="signInForm.invalid"
-        (click)="signIn()"
-      >
-        <span
-          *ngIf="!loading"
-          class="flex gap-2 items-center py-3 justify-center"
-        >
+      <button class="w-full py-3" mat-raised-button [disabled]="signInForm.invalid" (click)="signIn()">
+        <span *ngIf="!loading" class="flex gap-2 items-center py-3 justify-center">
           Sign in
         </span>
 
-        <mat-progress-spinner
-          *ngIf="loading"
-          [diameter]="24"
-          [mode]="'indeterminate'"
-        ></mat-progress-spinner>
+        <mat-progress-spinner *ngIf="loading" [diameter]="24" [mode]="'indeterminate'"></mat-progress-spinner>
       </button>
     </form>
   </div>
