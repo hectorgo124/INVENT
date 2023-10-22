@@ -7,9 +7,11 @@ import { DatabaseModule } from './database/database.module';
 import { ZipModule } from './modules/zip/zip.module';
 import { SeedsModule } from './seeds/seeds.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({envFilePath: './.env'}),
     UsersModule,
     ShipmentsModule,
     CompaniesModule,

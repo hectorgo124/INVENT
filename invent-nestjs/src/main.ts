@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import * as cors from 'cors';
 import { SeedsService } from './seeds/seeds.service';
+import { LISTEN_PORT, ORIGIN_CORS } from './constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,7 +30,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   var corsOptions = {
-    origin: 'http://localhost:4222',
+    origin: ORIGIN_CORS,
   }
   
   app.use(cors(corsOptions))
@@ -38,6 +39,6 @@ async function bootstrap() {
   const seedsService = app.get(SeedsService);
   await seedsService.seedDataBase();
 
-  await app.listen(3000);
+  await app.listen(LISTEN_PORT);
 }
 bootstrap();
