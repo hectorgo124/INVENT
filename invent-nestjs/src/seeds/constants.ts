@@ -100,8 +100,8 @@ export const shipments: CreateShipmentDto[] = [
   {
     address: 'Secundino Esnaola Kalea, 36, Bajo',
     zip: 20001,
-    senderName: 'Juan Pérez',
-    recipientName: 'María López',
+    sender: 'Juan Pérez',
+    recipient: 'María López',
     weight: 0.7,
     price: 7,
     typeId: 3,
@@ -111,8 +111,8 @@ export const shipments: CreateShipmentDto[] = [
     address:
       'Parque Tecnológico de, Rda. de Narcís Monturiol, 7, piso 2, puerta 15',
     zip: 46980,
-    senderName: 'Hector Granell',
-    recipientName: 'Dámaso González',
+    sender: 'Hector Granell',
+    recipient: 'Dámaso González',
     weight: 1.2,
     price: 12,
     typeId: 3,
@@ -121,8 +121,8 @@ export const shipments: CreateShipmentDto[] = [
   {
     address: 'Ronda del Calvari',
     zip: 46680,
-    senderName: 'Ana Sánchez',
-    recipientName: 'Pedro Ruiz',
+    sender: 'Ana Sánchez',
+    recipient: 'Pedro Ruiz',
     weight: 5.5,
     price: 108,
     typeId: 4,

@@ -16,7 +16,7 @@ import { SidebarModule } from './sidebar/sidebar.module';
     BrowserAnimationsModule,
     MatButtonModule,
     AuthModule,
-    SidebarModule
+    SidebarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

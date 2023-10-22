@@ -1,9 +1,8 @@
-<div
-  class="w-screen h-screen bg-gradient-to-b from-white via-slate-300 to-slate-400"
-  [ngClass]="{'flex' : logged}"
->
+<div class="w-screen h-screen flex flex-col lg:flex-row bg-gradient-to-b from-white via-slate-300 to-slate-400 overflow-hidden" [ngClass]="{'flex' : logged}">
   <ng-container *ngIf="logged">
     <app-sidebar></app-sidebar>
   </ng-container>
-  <router-outlet></router-outlet>
+  <div class="w-full">
+    <router-outlet></router-outlet>
+  </div>
 </div>

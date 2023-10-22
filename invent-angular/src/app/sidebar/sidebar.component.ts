@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../core/auth/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogSignOutComponent } from './dialog-sign-out/dialog-sign-out.component';
+import { ConfirmationComponent } from '../shared/components/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,6 +9,8 @@ import { DialogSignOutComponent } from './dialog-sign-out/dialog-sign-out.compon
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+  isVisible: boolean = true;
+
   nav_list: {
     title: string;
     icon: string;
@@ -19,15 +21,26 @@ export class SidebarComponent {
       icon: 'dashboard',
       url: '',
     },
+
+    {
+      title: 'Shipments',
+      icon: 'local_shipping',
+      url: 'shipments',
+    },
+    {
+      title: 'Companies',
+      icon: 'apartment',
+      url: 'companies',
+    },
     {
       title: 'Administrators',
       icon: 'group',
-      url: 'users',
+      url: 'admins',
     },
     {
-      title: 'Shipments',
+      title: 'Packages Types',
       icon: 'inventory_2',
-      url: 'shipments',
+      url: 'packages-types',
     },
   ];
 
@@ -38,7 +51,11 @@ export class SidebarComponent {
 
   signOut() {
     this.dialogSignOut
-      .open(DialogSignOutComponent, {
+      .open(ConfirmationComponent, {
+        data: {
+          title: 'Sign out',
+          desc: 'Are you sure you want to log out?',
+        },
         enterAnimationDuration: '300',
         exitAnimationDuration: '300',
         autoFocus: false,
@@ -48,5 +65,9 @@ export class SidebarComponent {
       .subscribe((exit: boolean) => {
         if (exit) this._authService.signOut();
       });
+  }
+
+  toggleSidebar() {
+    this.isVisible = !this.isVisible;
   }
 }

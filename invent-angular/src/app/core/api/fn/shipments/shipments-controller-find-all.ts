@@ -6,14 +6,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { GetShipmentDto } from '../../models/get-shipment-dto';
 
 export interface ShipmentsControllerFindAll$Params {
   page: number;
   limit: number;
 }
 
-export function shipmentsControllerFindAll(http: HttpClient, rootUrl: string, params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetShipmentDto>>> {
+export function shipmentsControllerFindAll(http: HttpClient, rootUrl: string, params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
   const rb = new RequestBuilder(rootUrl, shipmentsControllerFindAll.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
@@ -21,11 +20,11 @@ export function shipmentsControllerFindAll(http: HttpClient, rootUrl: string, pa
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'application/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<GetShipmentDto>>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }

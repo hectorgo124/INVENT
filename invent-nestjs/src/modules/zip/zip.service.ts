@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CreateZipDto } from './dto/create-zip.dto';
 import { UpdateZipDto } from './dto/update-zip.dto';
 import { Zip } from './entities/zip.entity';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ZipService {
@@ -24,5 +25,27 @@ export class ZipService {
     );
 
     return availableNumbers;
+  }
+
+  async getCompanyZips(id: number): Promise<Zip[]> {
+    return await this.zipRepository.findAll<Zip>({
+      where: {
+        companyid: id,
+      },
+    });
+  }
+
+  async deleteFromCompany(id: number) {
+    await this.zipRepository.destroy({
+      where: {
+        companyid: id,
+      },
+    });
+
+    return `Zips have been removed`;
+  }
+
+  async createZip(zip : any) {
+    return await this.zipRepository.create<Zip>(zip)
   }
 }

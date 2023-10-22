@@ -11,11 +11,26 @@ export class PackageTypesService {
     private packageTypesRepository: typeof PackageType,
   ) {}
 
-  async create(createPackageTypeDto: CreatePackageTypeDto): Promise<PackageType> {
-    return await this.packageTypesRepository.create<PackageType>({...createPackageTypeDto});
+  async create(
+    createPackageTypeDto: CreatePackageTypeDto,
+  ): Promise<PackageType> {
+    return await this.packageTypesRepository.create<PackageType>({
+      ...createPackageTypeDto,
+    });
   }
 
   async findAll() {
-    return this.packageTypesRepository.findAll<PackageType>();
+    const types = await this.packageTypesRepository.findAll<PackageType>();
+
+    return types.map((type) => this.toDTO(type));
+  }
+
+  toDTO(type: PackageType): GetPackageTypeDto {
+    return {
+      description: type.description,
+      min: type.min,
+      max: type.max,
+      formula: type.formula,
+    };
   }
 }

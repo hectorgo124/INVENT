@@ -1,0 +1,76 @@
+<div class="md:w-[1000px] max-h-[700px] flex flex-row flex-wrap overflow-hidden p-8 gap-8">
+    <div class="px-6 py-2 w-full flex justify-between" *ngIf="company; else companyCreate">
+        <h1 class="text-2xl font-bold tracking-wide text-center">
+            {{company.name}}
+        </h1>
+        <button mat-mini-fab color="primary" (click)="enableEdit()">
+            <mat-icon>{{ !edit ? "edit" : "close" }}</mat-icon>
+        </button>
+    </div>
+    <ng-template #companyCreate>
+        <h1 class="text-2xl font-bold tracking-wide text-center">
+            Create company
+        </h1>
+    </ng-template>
+    <form class="w-full mt-2 grid sm:grid-cols-1 xl:grid-cols-2 gap-8" *ngIf="companyForm" [formGroup]="companyForm">
+        <div class="flex flex-col gt-xs:flex-row max-h-12">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Name</mat-label>
+                <input maxlength="30" matInput formControlName="name" />
+            </mat-form-field>
+        </div>
+        <ng-container *ngIf="compZips || isCreate">
+            <div>
+                <h3 class="text-xl p-4">
+                    Zips:
+                </h3>
+                <ul class="space-y-4 max-h-80 overflow-y-scroll w-[50%]">
+                    <li *ngFor="let zip of compZips; let i = index"
+                        class="pl-5 text-lg flex items-center justify-between">
+                        <span>{{zip.number | zipPipe}}</span>
+                        <mat-icon class="cursor-pointer" *ngIf="edit" (click)="deleteZip(i)">close</mat-icon>
+                    </li>
+                    <ng-container *ngIf="newZips">
+                        <li *ngFor="let zip of newZips; let i = index"
+                            class="pl-5 text-lg flex items-center justify-between">
+                            <span>{{zip.number | zipPipe}}</span>
+                            <mat-icon class="cursor-pointer" (click)="deleteNewZip(i)" *ngIf="edit">close</mat-icon>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="isCreate">
+                        <li *ngFor="let zip of createZips; let i = index"
+                            class="pl-5 text-lg flex items-center justify-between">
+                            <span>{{zip | zipPipe}}</span>
+                            <mat-icon class="cursor-pointer" (click)="deleteNewZip(i)">close</mat-icon>
+                        </li>
+                    </ng-container>
+                </ul>
+
+                <ng-container *ngIf="edit || isCreate">
+                    <mat-form-field class="pr-3 pt-4">
+                        <mat-label>Add Zip</mat-label>
+                        <mat-select formControlName="newZip" (selectionChange)="onSelectedZip()">
+                            <mat-option *ngFor="let zip of availableZips" [value]="zip">
+                                {{zip | zipPipe}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <mat-icon [ngClass]="{'invisible': !selectedNewZip, 'visible': selectedNewZip}" class="cursor-pointer"
+                    (click)="addNewZip()">add</mat-icon>
+            </div>
+        </ng-container>
+    </form>
+
+    <div mat-dialog-actions class="px-6 py-2 w-full flex !justify-end">
+        <button mat-raised-button color="primary" [disabled]="companyForm.invalid"
+            [ngClass]="{ '!hidden': !edit && !isCreate, '!block': edit || isCreate }" (click)="isCreate ? createCompany() : editCompany()">
+            {{isCreate ? 'Create' : 'Save'}}
+        </button>
+
+        <button mat-raised-button mat-dialog-close color="warn">
+            Close
+        </button>
+    </div>
+</div>

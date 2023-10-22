@@ -9,7 +9,6 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { GetShipmentDto } from '../models/get-shipment-dto';
 import { Shipment } from '../models/shipment';
 import { shipmentsControllerCreateShipment } from '../fn/shipments/shipments-controller-create-shipment';
 import { ShipmentsControllerCreateShipment$Params } from '../fn/shipments/shipments-controller-create-shipment';
@@ -35,7 +34,7 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerFindAll$Response(params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetShipmentDto>>> {
+  shipmentsControllerFindAll$Response(params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
     return shipmentsControllerFindAll(this.http, this.rootUrl, params, context);
   }
 
@@ -45,9 +44,9 @@ export class ShipmentsService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  shipmentsControllerFindAll(params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<Array<GetShipmentDto>> {
+  shipmentsControllerFindAll(params: ShipmentsControllerFindAll$Params, context?: HttpContext): Observable<void> {
     return this.shipmentsControllerFindAll$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<GetShipmentDto>>): Array<GetShipmentDto> => r.body)
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

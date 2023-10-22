@@ -4,7 +4,7 @@ export { Company } from './models/company';
 export { CreateCompanyDto } from './models/create-company-dto';
 export { CreateShipmentDto } from './models/create-shipment-dto';
 export { GetCompanyDto } from './models/get-company-dto';
-export { GetShipmentDto } from './models/get-shipment-dto';
+export { GetPackageTypeDto } from './models/get-package-type-dto';
 export { GetUserDto } from './models/get-user-dto';
 export { PackageType } from './models/package-type';
 export { Shipment } from './models/shipment';

@@ -1,0 +1,9 @@
+<div class="p-8 max-w-full w-full flex flex-col gap-8">
+    <section class="w-full flex justify-between ">
+        <h1 class="text-3xl">
+            Shipments
+        </h1>
+        <button mat-raised-button><span>CREATE</span> <mat-icon>add</mat-icon></button>
+    </section>
+    <app-list *ngIf="columns.length > 0" [total]="total" [data]="shipments" [columns]="columns"></app-list>
+</div>

@@ -6,5 +6,6 @@ import { zipProvider } from './zip.providers';
 @Module({
   controllers: [ZipController],
   providers: [ZipService, ...zipProvider],
+  exports: [ZipService]
 })
 export class ZipModule {}

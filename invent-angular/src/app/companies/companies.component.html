@@ -1,0 +1,30 @@
+<div class="p-8 max-w-full w-full flex flex-col gap-8">
+    <section class="w-full flex justify-between ">
+        <h1 class="text-3xl">
+            Companies
+        </h1>
+        <button mat-raised-button (click)="openCompanyCreate()"><span>CREATE</span> <mat-icon>add</mat-icon></button>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+        <ng-container *ngFor="let company of companies">
+            <div class="bg-white border border-gray-200 rounded-lg shadow">
+                <img class="rounded-t-lg" src="" alt="" />
+                <div class="p-5 space-y-8">
+                    <h5 class="mb-2 text-2xl font-bold tracking-wide text-center">
+                        {{company.name}}
+                    </h5>
+    
+                    <div class="flex justify-around">
+                        <mat-icon class="cursor-pointer " matTooltip="Show and edit details" (click)="openCompanyDetails(company)">search</mat-icon>
+                        <mat-icon class="cursor-pointer " matTooltip="Search shipments">inventory_2</mat-icon>
+                        <mat-icon class="cursor-pointer text-red-500" matTooltip="Delete company"  (click)="deleteCompany(company)">delete</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        
+    </section>
+
+
+</div>

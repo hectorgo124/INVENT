@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  Query
+  Query,
 } from '@nestjs/common';
 import { ShipmentsService } from './shipments.service';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
@@ -27,10 +27,10 @@ export class ShipmentsController {
 
   @Get()
   findAll(
-    @Query('page') page : number = 1,
-    @Query('limit') limit : number = 10,
-  ): Promise<GetShipmentDto[]> {
-    return this.shipmentsService.findAll((page),(limit));
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10,
+  ): Promise<{ shipmentsDTO: GetShipmentDto[]; total: number }> {
+    return this.shipmentsService.findAll(page, limit);
   }
 
   @Delete(':id')
@@ -40,7 +40,7 @@ export class ShipmentsController {
 
   @Get('weekShipments')
   async getDailyShipmentsData() {
-    const data = await this.shipmentsService.getLastWeekDialyShipments();
+    const data = await this.shipmentsService.getLastWeekDailyShipments();
     return data;
   }
 }

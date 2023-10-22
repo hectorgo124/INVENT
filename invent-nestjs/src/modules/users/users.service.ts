@@ -20,17 +20,27 @@ export class UsersService {
   }
 
   async findAll(): Promise<GetUserDto[]> {
-    return this.usersRepository.findAll<User>();
+    const users = await this.usersRepository.findAll<User>();
+
+    return users.map((user) => this.toDTO(user));
   }
 
-  findOne(username: string): Promise<GetUserDto> {
+  toDTO(user: User): GetUserDto {
+    return {
+      name: user.name,
+      username: user.username,
+      email: user.email,
+    };
+  }
+
+  findOne(username: string): Promise<User> {
     const user = this.usersRepository.findOne<User>({
       where: {
         username: username,
       },
     });
 
-    if(!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException('User not found');
 
     return user;
   }

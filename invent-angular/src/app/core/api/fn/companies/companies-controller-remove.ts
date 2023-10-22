@@ -6,12 +6,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { GetCompanyDto } from '../../models/get-company-dto';
 
 export interface CompaniesControllerRemove$Params {
   id: string;
 }
 
-export function companiesControllerRemove(http: HttpClient, rootUrl: string, params: CompaniesControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+export function companiesControllerRemove(http: HttpClient, rootUrl: string, params: CompaniesControllerRemove$Params, context?: HttpContext): Observable<StrictHttpResponse<GetCompanyDto>> {
   const rb = new RequestBuilder(rootUrl, companiesControllerRemove.PATH, 'delete');
   if (params) {
     rb.path('id', params.id, {});
@@ -22,7 +23,7 @@ export function companiesControllerRemove(http: HttpClient, rootUrl: string, par
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<string>;
+      return r as StrictHttpResponse<GetCompanyDto>;
     })
   );
 }

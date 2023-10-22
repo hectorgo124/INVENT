@@ -9,7 +9,16 @@ import { SeedsModule } from './seeds/seeds.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, ShipmentsModule, CompaniesModule, PackageTypesModule, DatabaseModule, ZipModule, SeedsModule, AuthModule],
+  imports: [
+    UsersModule,
+    ShipmentsModule,
+    CompaniesModule,
+    PackageTypesModule,
+    DatabaseModule,
+    ZipModule,
+    SeedsModule,
+    AuthModule,
+  ],
   controllers: [],
   providers: [],
 })

@@ -4,15 +4,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { SidebarComponent } from './sidebar.component';
 import { SharedModule } from '../shared/shared.module';
-import { DialogSignOutComponent } from './dialog-sign-out/dialog-sign-out.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
-  declarations: [SidebarComponent, DialogSignOutComponent],
+  declarations: [SidebarComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [SidebarComponent],

@@ -13,10 +13,10 @@ export class Shipment extends Model {
   zip: number;
 
   @Column
-  senderName: string;
+  sender: string;
 
   @Column
-  recipientName: string;
+  recipient: string;
 
   @Column
   weight: string;

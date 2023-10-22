@@ -9,7 +9,7 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { PackageType } from '../models/package-type';
+import { GetPackageTypeDto } from '../models/get-package-type-dto';
 import { packageTypesControllerFindAll } from '../fn/packages-types/package-types-controller-find-all';
 import { PackageTypesControllerFindAll$Params } from '../fn/packages-types/package-types-controller-find-all';
 
@@ -28,7 +28,7 @@ export class PackagesTypesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  packageTypesControllerFindAll$Response(params?: PackageTypesControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<PackageType>>> {
+  packageTypesControllerFindAll$Response(params?: PackageTypesControllerFindAll$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetPackageTypeDto>>> {
     return packageTypesControllerFindAll(this.http, this.rootUrl, params, context);
   }
 
@@ -38,9 +38,9 @@ export class PackagesTypesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  packageTypesControllerFindAll(params?: PackageTypesControllerFindAll$Params, context?: HttpContext): Observable<Array<PackageType>> {
+  packageTypesControllerFindAll(params?: PackageTypesControllerFindAll$Params, context?: HttpContext): Observable<Array<GetPackageTypeDto>> {
     return this.packageTypesControllerFindAll$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<PackageType>>): Array<PackageType> => r.body)
+      map((r: StrictHttpResponse<Array<GetPackageTypeDto>>): Array<GetPackageTypeDto> => r.body)
     );
   }
 

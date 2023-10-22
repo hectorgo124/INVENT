@@ -12,11 +12,11 @@ export class CreateShipmentDto {
 
     @ApiProperty()
     @IsNotEmpty()
-    senderName: string;
+    sender: string;
 
     @ApiProperty()
     @IsNotEmpty()
-    recipientName: string;
+    recipient: string;
 
     @ApiProperty()
     weight: number;

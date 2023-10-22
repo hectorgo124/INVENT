@@ -11,19 +11,27 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {  MatDialogModule } from '@angular/material/dialog';
+import { ZipPipe } from '../pipes/zip-pipe.pipe';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { CardComponent } from './components/card/card.component';
 @NgModule({
-  declarations: [],
+  declarations: [ZipPipe, ConfirmationComponent, CardComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule,
     MatTooltipModule,
-    FormsModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatDialogModule,
+    ScrollingModule
   ],
   exports: [
     CommonModule,
@@ -39,6 +47,10 @@ import {  MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatSidenavModule,
     MatDialogModule,
+    ZipPipe,
+    ScrollingModule,
+    ConfirmationComponent,
+    CardComponent
   ],
 })
 export class SharedModule {}

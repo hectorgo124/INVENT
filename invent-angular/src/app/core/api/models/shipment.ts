@@ -8,8 +8,8 @@ export interface Shipment {
   companyId: number;
   packageType: PackageType;
   price: string;
-  recipientName: string;
-  senderName: string;
+  recipient: string;
+  sender: string;
   typeId: number;
   weight: string;
   zip: number;

@@ -4,8 +4,8 @@ export interface CreateShipmentDto {
   address: string;
   companyId: number;
   price: number;
-  recipientName: string;
-  senderName: string;
+  recipient: string;
+  sender: string;
   typeId: number;
   weight: number;
   zip: number;

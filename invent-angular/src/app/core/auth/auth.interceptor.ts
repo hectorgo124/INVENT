@@ -25,14 +25,15 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this._authService.accessToken) {
       newReq = req.clone({
         setHeaders: {
-          Authorization: this._authService.accessToken,
+          Authorization: 'Bearer ' + this._authService.accessToken,
           'Access-Control-Allow-Origin': '*',
+          
         },
       });
     }
 
-    if (this._authService.accessToken) {
-      localStorage.removeItem('AccessToken');
+    if (!this._authService.accessToken) {
+      localStorage.removeItem('accessToken');
       this._authService.signOut();
     }
 
