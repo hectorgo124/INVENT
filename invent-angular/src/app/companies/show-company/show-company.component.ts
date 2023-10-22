@@ -69,8 +69,8 @@ export class ShowCompanyComponent implements OnInit {
     } else {
       this.companyForm?.disable();
       this.newZips = [];
-      this.availableZips = this.originalAvailable;
-      this.compZips = this.originalZips;
+      this.availableZips = Object.assign([], this.originalAvailable);
+      this.compZips = Object.assign([], this.originalZips);
       this.selectedNewZip = false;
     }
   }
@@ -108,6 +108,8 @@ export class ShowCompanyComponent implements OnInit {
   }
 
   deleteZip(n: number) {
+    this.availableZips.push(this.compZips[n].number);
+    this.availableZips = this.availableZips.sort((a, b) => a - b);
     this.compZips.splice(n, 1);
   }
 
