@@ -8,6 +8,8 @@ Panel de administración para una empresa intermediaria de envíos de mercancía
 ```
 npm install
 ```
+Los datos de usuarios para poder iniciar sesión se encuentran en el archivo 'invent-nestjs/src/seeds/constants.ts'. Este archivo tiene datos para rellenar la base de datos.
+
 * En el archivo 'invent-nestjs/src/main.ts' se encuentra la llamda a la función que rellena las base de datos, por lo tanto, si no quieres que se reinicie cada vez que se ejecuta el servidor, comenta las lineas:
 ```
 const seedsService = app.get(SeedsService);
